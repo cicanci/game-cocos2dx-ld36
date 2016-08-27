@@ -84,17 +84,21 @@ void MapLayer::initTouchEvent()
 bool MapLayer::onTouchBegan(Touch* touch, Event* event)
 {
     log("MapLayer::touchBegan");
+    auto moveTo = MoveTo::create(2, touch->getLocation());
+    mShip->runAction(moveTo);
+
     return true;
 }
 
 void MapLayer::onTouchMoved(Touch *touch, Event *event)
 {
-    
+    //move the map
 }
 
 void MapLayer::onTouchEnded(Touch *touch, Event *event)
 {
     log("MapLayer::touchEnd");
+    mShip->stopAllActions();
 }
 
 void MapLayer::onTouchCancelled(Touch *touch, Event *event)
@@ -104,5 +108,5 @@ void MapLayer::onTouchCancelled(Touch *touch, Event *event)
 
 void MapLayer::update(float dt)
 {
-    
+
 }
