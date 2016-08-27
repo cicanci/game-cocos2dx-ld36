@@ -1,7 +1,7 @@
-#include "HelloWorldScene.h"
 #include "SimpleAudioEngine.h"
 
-USING_NS_CC;
+#include "HelloWorldScene.h"
+#include "Sunstone.h"
 
 Scene* HelloWorld::createScene()
 {
@@ -73,9 +73,11 @@ bool HelloWorld::init()
     // add the sprite as a child to this layer
     this->addChild(sprite, 0);
     
+    auto sunstone = new Sunstone();
+    this->addChild(sunstone, 1);
+
     return true;
 }
-
 
 void HelloWorld::menuCloseCallback(Ref* pSender)
 {
@@ -90,6 +92,4 @@ void HelloWorld::menuCloseCallback(Ref* pSender)
     
     //EventCustom customEndEvent("game_scene_close_event");
     //_eventDispatcher->dispatchEvent(&customEndEvent);
-    
-    
 }
