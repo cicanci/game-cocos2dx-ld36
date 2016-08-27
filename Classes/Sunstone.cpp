@@ -17,15 +17,17 @@ void Sunstone::initSprites()
     Vec2 origin = Director::getInstance()->getVisibleOrigin();
     
     mSunstone = Sprite::create("sunstone.png");
-    mSunstone->setPosition(Vec2(visibleSize.width/2 + origin.x, visibleSize.height/2 + origin.y));
+    mSunstone->setPosition(Vec2(visibleSize.width*0.5f + origin.x, visibleSize.height*0.5f + origin.y));
     this->addChild(mSunstone, 0);
     
     mDotUp = Sprite::create("dot.png");
-    mDotUp->setPosition(Vec2(mSunstone->getPosition().x - 10, mSunstone->getPosition().y + 5));
+    mDotUp->setPosition(Vec2(mSunstone->getPosition().x - mDotUp->getContentSize().width*2,
+                             mSunstone->getPosition().y + mDotUp->getContentSize().height*0.5f));
     this->addChild(mDotUp, 1);
     
     mDotDown = Sprite::create("dot.png");
-    mDotDown->setPosition(Vec2(mSunstone->getPosition().x - 10, mSunstone->getPosition().y));
+    mDotDown->setPosition(Vec2(mSunstone->getPosition().x - mDotDown->getContentSize().width*2,
+                               mSunstone->getPosition().y));
     this->addChild(mDotDown, 1);
     
     mSunPosition = Vec2(0, 0);
@@ -83,6 +85,8 @@ void Sunstone::touchEvent(Touch* touch)
     mDotDown->setOpacity(opacityY);
     
     mSunstone->setPosition(touch->getLocation());
-    mDotUp->setPosition(Vec2(mSunstone->getPosition().x - 10, mSunstone->getPosition().y + 5));
-    mDotDown->setPosition(Vec2(mSunstone->getPosition().x - 10, mSunstone->getPosition().y));
+    mDotUp->setPosition(Vec2(mSunstone->getPosition().x - mDotUp->getContentSize().width,
+                             mSunstone->getPosition().y + mDotUp->getContentSize().height*0.5f));
+    mDotDown->setPosition(Vec2(mSunstone->getPosition().x - mDotDown->getContentSize().width,
+                               mSunstone->getPosition().y));
 }
