@@ -12,8 +12,12 @@ public:
     ~SunstoneLayer() { mInstance = NULL; }
     static SunstoneLayer* Instance() { return mInstance; }
     
-    void touchEvent(Touch* touch);
     void show(Vec2 sun);
+    
+    bool onTouchBegan(Touch* touch, Event* event);
+    void onTouchMoved(Touch *touch, Event *event);
+    void onTouchEnded(Touch *touch, Event *event);
+    void onTouchCancelled(Touch *touch, Event *event);
     
     virtual bool init();
     CREATE_FUNC(SunstoneLayer);

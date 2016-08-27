@@ -21,24 +21,34 @@ bool SunstoneLayer::init()
 void SunstoneLayer::initTouchEvent()
 {
     mTouchListener = EventListenerTouchOneByOne::create();
-//    mTouchListener->setSwallowTouches(true);
+    //mTouchListener->setSwallowTouches(true);
     mTouchListener->retain();
     
-    mTouchListener->onTouchBegan = [](Touch* touch, Event* event)
-    {
-        log("Sunstone::touchBegan");
-        return true;
-    };
-    
-    mTouchListener->onTouchMoved = [=](Touch* touch, Event* event)
-    {
-        SunstoneLayer::touchEvent(touch);
-    };
-    
-    mTouchListener->onTouchEnded = [=](Touch* touch, Event* event)
-    {
-        log("Sunstone::touchEnd");
-    };
+    mTouchListener->onTouchBegan = CC_CALLBACK_2(SunstoneLayer::onTouchBegan, this);
+    mTouchListener->onTouchMoved = CC_CALLBACK_2(SunstoneLayer::onTouchMoved, this);
+    mTouchListener->onTouchEnded = CC_CALLBACK_2(SunstoneLayer::onTouchEnded, this);
+    mTouchListener->onTouchCancelled = CC_CALLBACK_2(SunstoneLayer::onTouchCancelled, this);
+}
+
+bool SunstoneLayer::onTouchBegan(Touch* touch, Event* event)
+{
+    log("SunstoneLayer::touchBegan");
+    return true;
+}
+
+void SunstoneLayer::onTouchMoved(Touch *touch, Event *event)
+{
+    updateOpacity(touch->getLocation(), mSunPosition);
+}
+
+void SunstoneLayer::onTouchEnded(Touch *touch, Event *event)
+{
+    log("SunstoneLayer::touchEnd");
+}
+
+void SunstoneLayer::onTouchCancelled(Touch *touch, Event *event)
+{
+    onTouchEnded(touch, event);
 }
 
 void SunstoneLayer::initSprites()
@@ -94,11 +104,6 @@ void SunstoneLayer::updateOpacity(Vec2 touch, Vec2 sun)
                              mSunstone->getPosition().y + mDotUp->getContentSize().height*0.5f));
     mDotDown->setPosition(Vec2(mSunstone->getPosition().x - mDotDown->getContentSize().width,
                                mSunstone->getPosition().y));
-}
-
-void SunstoneLayer::touchEvent(Touch* touch)
-{
-    updateOpacity(touch->getLocation(), mSunPosition);
 }
 
 void SunstoneLayer::show(Vec2 sun)
