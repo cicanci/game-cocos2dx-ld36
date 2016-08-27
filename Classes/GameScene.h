@@ -1,11 +1,13 @@
-#ifndef __HELLOWORLD_SCENE_H__
-#define __HELLOWORLD_SCENE_H__
+#ifndef __GAME_SCENE_H__
+#define __GAME_SCENE_H__
 
 #include "cocos2d.h"
 
+#include "Sun.h"
+
 USING_NS_CC;
 
-class HelloWorld : public cocos2d::Layer
+class GameScene : public cocos2d::Layer
 {
 public:
     static cocos2d::Scene* createScene();
@@ -16,7 +18,12 @@ public:
     void menuCloseCallback(cocos2d::Ref* pSender);
     
     // implement the "static create()" method manually
-    CREATE_FUNC(HelloWorld);
+    CREATE_FUNC(GameScene);
+    
+private:
+    void initMenu();
+    
+    Sun* mSun;
 };
 
-#endif // __HELLOWORLD_SCENE_H__
+#endif // __GAME_SCENE_H__
