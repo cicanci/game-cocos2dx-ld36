@@ -16,6 +16,7 @@ public:
 private:
     void initTouchEvent();
     void initSprites();
+    void updateOpacity(Vec2 position);
     
     Sprite* mSunstone;
     Sprite* mDotUp;
