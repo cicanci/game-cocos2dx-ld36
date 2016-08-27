@@ -15,7 +15,8 @@ LOCAL_SRC_FILES := hellocpp/main.cpp \
                    ../../Classes/AppDelegate.cpp \
                    ../../Classes/GameScene.cpp \
                    ../../Classes/Sunstone.cpp \
-                   ../../Classes/Sun.cpp
+                   ../../Classes/Sun.cpp \
+                   ../../Classes/Ship.cpp
 
 LOCAL_C_INCLUDES := $(LOCAL_PATH)/../../Classes
 

@@ -1,10 +1,10 @@
-#include "Sunstone.h"
+#include "SunstoneLayer.h"
 
 #include "Sun.h"
 
-Sunstone* Sunstone::mInstance = 0;
+SunstoneLayer* SunstoneLayer::mInstance = 0;
 
-bool Sunstone::init()
+bool SunstoneLayer::init()
 {
     if (!Layer::init())
     {
@@ -18,7 +18,7 @@ bool Sunstone::init()
     return true;
 }
 
-void Sunstone::initTouchEvent()
+void SunstoneLayer::initTouchEvent()
 {
     mTouchListener = EventListenerTouchOneByOne::create();
 //    mTouchListener->setSwallowTouches(true);
@@ -32,7 +32,7 @@ void Sunstone::initTouchEvent()
     
     mTouchListener->onTouchMoved = [=](Touch* touch, Event* event)
     {
-        Sunstone::touchEvent(touch);
+        SunstoneLayer::touchEvent(touch);
     };
     
     mTouchListener->onTouchEnded = [=](Touch* touch, Event* event)
@@ -41,7 +41,7 @@ void Sunstone::initTouchEvent()
     };
 }
 
-void Sunstone::initSprites()
+void SunstoneLayer::initSprites()
 {
     mSunstone = Sprite::create("sunstone.png");
     this->addChild(mSunstone, 0);
@@ -53,7 +53,7 @@ void Sunstone::initSprites()
     this->addChild(mDotDown, 1);
 }
 
-void Sunstone::setInitialPosition()
+void SunstoneLayer::setInitialPosition()
 {
     auto visibleSize = Director::getInstance()->getVisibleSize();
     Vec2 origin = Director::getInstance()->getVisibleOrigin();
@@ -62,7 +62,7 @@ void Sunstone::setInitialPosition()
     updateOpacity(initialPosition, mSunPosition);
 }
 
-void Sunstone::updateOpacity(Vec2 touch, Vec2 sun)
+void SunstoneLayer::updateOpacity(Vec2 touch, Vec2 sun)
 {
     float opacityX = 255 - std::abs(sun.x - touch.x);
     float opacityY = 255 - std::abs(sun.y - touch.y);
@@ -85,7 +85,7 @@ void Sunstone::updateOpacity(Vec2 touch, Vec2 sun)
         opacityY = 255;
     }
     
-    log("Touch: (%f, %f) Opacity: (%f, %f)", touch.x, touch.y, opacityX, opacityY);
+    //log("Touch: (%f, %f) Opacity: (%f, %f)", touch.x, touch.y, opacityX, opacityY);
     mDotUp->setOpacity(opacityX);
     mDotDown->setOpacity(opacityY);
     
@@ -96,12 +96,12 @@ void Sunstone::updateOpacity(Vec2 touch, Vec2 sun)
                                mSunstone->getPosition().y));
 }
 
-void Sunstone::touchEvent(Touch* touch)
+void SunstoneLayer::touchEvent(Touch* touch)
 {
     updateOpacity(touch->getLocation(), mSunPosition);
 }
 
-void Sunstone::show(Vec2 sun)
+void SunstoneLayer::show(Vec2 sun)
 {
     mSunPosition = sun;
     this->setVisible(!this->isVisible());

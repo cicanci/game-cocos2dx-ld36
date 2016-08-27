@@ -2,6 +2,11 @@
 
 bool Sun::init()
 {
+    if (!Node::init())
+    {
+        return false;
+    }
+    
     auto visibleSize = Director::getInstance()->getVisibleSize();
     
     std::vector<Vec2> possiblePositions(8);

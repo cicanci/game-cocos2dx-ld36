@@ -7,23 +7,16 @@
 
 USING_NS_CC;
 
-class GameScene : public cocos2d::Layer
+class GameScene : public Layer
 {
 public:
     static cocos2d::Scene* createScene();
 
     virtual bool init();
-    
-    // a selector callback
-    void menuCloseCallback(cocos2d::Ref* pSender);
-    
-    // implement the "static create()" method manually
     CREATE_FUNC(GameScene);
     
 private:
-    void initMenu();
-    
-    Sun* mSun;
+
 };
 
 #endif // __GAME_SCENE_H__

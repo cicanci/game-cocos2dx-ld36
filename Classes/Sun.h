@@ -1,11 +1,11 @@
-#ifndef __SUN_SCENE_H__
-#define __SUN_SCENE_H__
+#ifndef __SUN_H__
+#define __SUN_H__
 
 #include "cocos2d.h"
 
 USING_NS_CC;
 
-class Sun : public cocos2d::Node
+class Sun : public Node
 {
 public:    
     void generate();
@@ -19,4 +19,4 @@ private:
     std::vector<Vec2> mPossiblePositions;
 };
 
-#endif // __SUN_SCENE_H__
+#endif // __SUN_H__
