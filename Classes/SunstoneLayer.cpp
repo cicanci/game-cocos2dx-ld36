@@ -1,7 +1,5 @@
 #include "SunstoneLayer.h"
 
-#include "Sun.h"
-
 SunstoneLayer* SunstoneLayer::mInstance = 0;
 
 bool SunstoneLayer::init()

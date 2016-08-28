@@ -3,8 +3,6 @@
 
 #include "cocos2d.h"
 
-#include "Sun.h"
-
 USING_NS_CC;
 
 class GameScene : public LayerColor

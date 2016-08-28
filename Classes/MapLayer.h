@@ -3,8 +3,6 @@
 
 #include "cocos2d.h"
 
-#include "Sun.h"
-
 USING_NS_CC;
 
 class MapLayer : public Layer
@@ -31,7 +29,6 @@ private:
     
     static MapLayer* mInstance;
     EventListenerTouchOneByOne* mTouchListener;
-    Sun* mSun;
     Vec2 mStartPosition;
     bool mIsMoving;
     bool mMoveRight;

@@ -3,6 +3,7 @@
 #include "HUDLayer.h"
 #include "MapLayer.h"
 #include "ShipLayer.h"
+#include "SunLayer.h"
 #include "SunstoneLayer.h"
 
 Scene* GameScene::createScene()
@@ -17,6 +18,9 @@ Scene* GameScene::createScene()
     
     auto ship = ShipLayer::create();
     scene->addChild(ship);
+    
+    auto sun = SunLayer::create();
+    scene->addChild(sun);
     
     auto hud = HUDLayer::create();
     scene->addChild(hud);

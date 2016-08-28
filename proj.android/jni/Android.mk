@@ -17,7 +17,7 @@ LOCAL_SRC_FILES := hellocpp/main.cpp \
                    ../../Classes/HUDLayer.cpp \
                    ../../Classes/MapLayer.cpp \
                    ../../Classes/ShipLayer.cpp \
-                   ../../Classes/Sun.cpp \
+                   ../../Classes/SunLayer.cpp \
                    ../../Classes/SunstoneLayer.cpp
 
 LOCAL_C_INCLUDES := $(LOCAL_PATH)/../../Classes

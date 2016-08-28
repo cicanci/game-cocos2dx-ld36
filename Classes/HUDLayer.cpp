@@ -35,7 +35,8 @@ void HUDLayer::initMenu()
     
     mDistance = Label::createWithTTF("Distance from center: 0", "fonts/Marker Felt.ttf", 24);
     mDistance->setPosition(Vec2(origin.x + visibleSize.width/2,
-                            origin.y + visibleSize.height - mDistance->getContentSize().height));
+                                origin.y + visibleSize.height - mDistance->getContentSize().height));
+    mDistance->enableOutline(Color4B::BLACK, 1);
     this->addChild(mDistance, 1);
 }
 

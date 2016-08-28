@@ -1,6 +1,7 @@
 #include "MapLayer.h"
 
 #include "ShipLayer.h"
+#include "SunLayer.h"
 #include "SunstoneLayer.h"
 
 MapLayer* MapLayer::mInstance = 0;
@@ -14,10 +15,7 @@ bool MapLayer::init()
     
     initTouchEvent();
     initBackground();
-    
-    mSun = Sun::create();
-    mSun->retain();
-    
+
     this->scheduleUpdate();
     
     return true;
@@ -46,7 +44,7 @@ void MapLayer::sunstoneCallback(Ref* pSender)
         _eventDispatcher->addEventListenerWithSceneGraphPriority(mTouchListener, this);
     }
 
-    SunstoneLayer::Instance()->show(mSun->getSunPosition());
+    SunstoneLayer::Instance()->show(SunLayer::Instance()->getSunPosition());
 }
 
 void MapLayer::initTouchEvent()
