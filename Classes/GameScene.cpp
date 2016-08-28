@@ -30,7 +30,7 @@ Scene* GameScene::createScene()
 
 bool GameScene::init()
 {
-    if (!Layer::init())
+    if (!LayerColor::initWithColor(Color4B(0, 102, 255, 255)))
     {
         return false;
     }

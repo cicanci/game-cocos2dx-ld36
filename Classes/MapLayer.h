@@ -37,7 +37,7 @@ private:
     bool mMoveRight;
     bool mMoveUp;
     
-    const int SPEED = 100;
+    const int SPEED = 50;
 };
 
 #endif // __MAP_LAYER_H__

@@ -7,7 +7,7 @@
 
 USING_NS_CC;
 
-class GameScene : public Layer
+class GameScene : public LayerColor
 {
 public:
     static cocos2d::Scene* createScene();
