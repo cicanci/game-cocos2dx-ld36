@@ -52,28 +52,68 @@ void SunLayer::generate()
     log("Sun points to SOUTH at (%f, %f)", mPossiblePositions[mSouth].x, mPossiblePositions[mSouth].y);
     
     mCardinalDirection = static_cast<CardinalDirection>(random(0, 3));
+    int objectiveIndex = -1;
     switch (mCardinalDirection)
     {
         case EAST:
             mDirectionName = "EAST";
             mObjectivePosition = mPossiblePositions[mEast];
+            objectiveIndex = mEast;
             break;
         case WEST:
             mDirectionName = "WEST";
             mObjectivePosition = mPossiblePositions[mWest];
+            objectiveIndex = mWest;
             break;
         case NORTH:
             mDirectionName = "NORTH";
             mObjectivePosition = mPossiblePositions[mNorth];
+            objectiveIndex = mNorth;
             break;
         case SOUTH:
             mDirectionName = "SOUTH";
             mObjectivePosition = mPossiblePositions[mSouth];
+            objectiveIndex = mSouth;
             break;
         default:
             break;
     }
     
+    float offset = random(200, 500);
+    switch (objectiveIndex) {
+        case 0:
+            mObjectivePosition.x -= offset;
+            mObjectivePosition.y -= offset;
+            break;
+        case 1:
+            mObjectivePosition.x -= offset;
+            break;
+        case 2:
+            mObjectivePosition.x -= offset;
+            mObjectivePosition.y += offset;
+            break;
+        case 3:
+            mObjectivePosition.y += offset;
+            break;
+        case 4:
+            mObjectivePosition.x += offset;
+            mObjectivePosition.y += offset;
+            break;
+        case 5:
+            mObjectivePosition.x += offset;
+            break;
+        case 6:
+            mObjectivePosition.x += offset;
+            mObjectivePosition.y -= offset;
+            break;
+        case 7:
+            mObjectivePosition.y -= offset;
+            break;
+        default:
+            break;
+    }
+
+    log("Objective position: (%f, %f)", mObjectivePosition.x, mObjectivePosition.y);
     MapLayer::Instance()->setObjectivePosition(mObjectivePosition);
 }
 
