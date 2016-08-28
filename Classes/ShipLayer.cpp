@@ -21,18 +21,8 @@ bool ShipLayer::init()
 
 void ShipLayer::updateShip(Vec2 touch)
 {
-    float angle = atan2f(touch.y - mShip->getPosition().y, touch.x - mShip->getPosition().x);
-    angle = CC_RADIANS_TO_DEGREES(angle);
+    float angle = atan2f(touch.x - mShip->getPosition().x, touch.y - mShip->getPosition().y);
+    angle = CC_RADIANS_TO_DEGREES(angle) + 90;
     
-    if (angle < 0)
-    {
-        angle += 360;
-    }
-    
-    //    angle += (touch->getLocation().x - mShip->getPosition().x) < 0 ? 90 : -90;
-    log("angle: %f", angle);
-    
-    //    auto rotateTo = RotateBy::create(0.5f, angle);
-    //    mShip->runAction(rotateTo);
     mShip->setRotation(angle);
 }

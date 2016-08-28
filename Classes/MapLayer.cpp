@@ -66,12 +66,14 @@ void MapLayer::initTouchEvent()
 bool MapLayer::onTouchBegan(Touch* touch, Event* event)
 {
     log("MapLayer::touchBegan");
-    ShipLayer::Instance()->updateShip(touch->getLocation());
+    onTouchMoved(touch, event);
     return true;
 }
 
 void MapLayer::onTouchMoved(Touch *touch, Event *event)
 {
+    ShipLayer::Instance()->updateShip(touch->getLocation());
+
     auto visibleSize = Director::getInstance()->getVisibleSize();
     mMoveRight = (touch->getLocation().x > visibleSize.width*0.5f) ? true : false;
     mMoveUp = (touch->getLocation().y > visibleSize.height*0.5f) ? true : false;
