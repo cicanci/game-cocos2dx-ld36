@@ -3,7 +3,6 @@
 
 #include "cocos2d.h"
 
-#include "Ship.h"
 #include "Sun.h"
 
 USING_NS_CC;
@@ -11,6 +10,10 @@ USING_NS_CC;
 class MapLayer : public Layer
 {
 public:
+    MapLayer() { mInstance = this; }
+    ~MapLayer() { mInstance = NULL; }
+    static MapLayer* Instance() { return mInstance; }
+
     void sunstoneCallback(Ref* pSender);
     
     void update(float dt);
@@ -23,12 +26,17 @@ public:
     CREATE_FUNC(MapLayer);
     
 private:
-    void initMenu();
     void initTouchEvent();
+    void initBackground();
     
+    static MapLayer* mInstance;
     EventListenerTouchOneByOne* mTouchListener;
-    Sprite* mShip;
     Sun* mSun;
+    bool mIsMoving;
+    bool mMoveRight;
+    bool mMoveUp;
+    
+    const int SPEED = 100;
 };
 
 #endif // __MAP_LAYER_H__

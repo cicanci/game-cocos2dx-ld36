@@ -1,6 +1,9 @@
 #include "MapLayer.h"
 
+#include "ShipLayer.h"
 #include "SunstoneLayer.h"
+
+MapLayer* MapLayer::mInstance = 0;
 
 bool MapLayer::init()
 {
@@ -9,47 +12,25 @@ bool MapLayer::init()
         return false;
     }
     
-    initMenu();
     initTouchEvent();
+    initBackground();
     
     mSun = Sun::create();
     mSun->retain();
-    
-    auto visibleSize = Director::getInstance()->getVisibleSize();
-    Vec2 origin = Director::getInstance()->getVisibleOrigin();
-    
-    mShip = Sprite::create("ship.png");
-    mShip->setPosition(Vec2(visibleSize.width/2 + origin.x, visibleSize.height/2 + origin.y));
-    this->addChild(mShip, 0);
     
     this->scheduleUpdate();
     
     return true;
 }
 
-void MapLayer::initMenu()
+void MapLayer::initBackground()
 {
     auto visibleSize = Director::getInstance()->getVisibleSize();
     Vec2 origin = Director::getInstance()->getVisibleOrigin();
     
-    auto closeItem = MenuItemImage::create("buttonSunstone.png",
-                                           "buttonSunstone.png",
-                                           CC_CALLBACK_1(MapLayer::sunstoneCallback, this));
-    
-    closeItem->setPosition(Vec2(origin.x + visibleSize.width - closeItem->getContentSize().width/2 ,
-                                origin.y + closeItem->getContentSize().height/2));
-    
-    auto menu = Menu::create(closeItem, NULL);
-    menu->setPosition(Vec2::ZERO);
-    this->addChild(menu, 1);
-    
-    auto label = Label::createWithTTF("Sunstone - A Cloudy Day", "fonts/Marker Felt.ttf", 24);
-    label->setPosition(Vec2(origin.x + visibleSize.width/2,
-                            origin.y + visibleSize.height - label->getContentSize().height));
-    this->addChild(label, 1);
-    
-    auto sprite = Sprite::create("HelloWorld.png");
+    auto sprite = Sprite::create("sea.png");
     sprite->setPosition(Vec2(visibleSize.width/2 + origin.x, visibleSize.height/2 + origin.y));
+    sprite->setScale(2);
     this->addChild(sprite, 0);
 }
 
@@ -84,21 +65,25 @@ void MapLayer::initTouchEvent()
 bool MapLayer::onTouchBegan(Touch* touch, Event* event)
 {
     log("MapLayer::touchBegan");
-    auto moveTo = MoveTo::create(2, touch->getLocation());
-    mShip->runAction(moveTo);
+    ShipLayer::Instance()->updateShip(touch->getLocation());
+    
+    auto visibleSize = Director::getInstance()->getVisibleSize();
+    mMoveRight = (touch->getLocation().x > visibleSize.width*0.5f) ? true : false;
+    mMoveUp = (touch->getLocation().y > visibleSize.height*0.5f) ? true : false;
+    mIsMoving = true;
 
     return true;
 }
 
 void MapLayer::onTouchMoved(Touch *touch, Event *event)
 {
-    //move the map
+
 }
 
 void MapLayer::onTouchEnded(Touch *touch, Event *event)
 {
     log("MapLayer::touchEnd");
-    mShip->stopAllActions();
+    mIsMoving = false;
 }
 
 void MapLayer::onTouchCancelled(Touch *touch, Event *event)
@@ -108,5 +93,28 @@ void MapLayer::onTouchCancelled(Touch *touch, Event *event)
 
 void MapLayer::update(float dt)
 {
+    if (mIsMoving)
+    {
+        Vec2 position = this->getPosition();
 
+        if (mMoveRight)
+        {
+            position.x -= SPEED * dt;
+        }
+        else
+        {
+            position.x += SPEED * dt;
+        }
+        
+        if (mMoveUp)
+        {
+            position.y -= SPEED * dt;
+        }
+        else
+        {
+            position.y += SPEED * dt;
+        }
+        
+        this->setPosition(position);
+    }
 }

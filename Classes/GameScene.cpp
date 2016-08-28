@@ -1,7 +1,8 @@
-#include "SimpleAudioEngine.h"
-
 #include "GameScene.h"
+
+#include "HUDLayer.h"
 #include "MapLayer.h"
+#include "ShipLayer.h"
 #include "SunstoneLayer.h"
 
 Scene* GameScene::createScene()
@@ -13,6 +14,12 @@ Scene* GameScene::createScene()
     
     auto map = MapLayer::create();
     scene->addChild(map);
+    
+    auto ship = ShipLayer::create();
+    scene->addChild(ship);
+    
+    auto hud = HUDLayer::create();
+    scene->addChild(hud);
     
     auto sunstone = SunstoneLayer::create();
     sunstone->setVisible(false);
