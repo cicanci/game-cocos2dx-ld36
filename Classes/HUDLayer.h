@@ -9,12 +9,15 @@ class HUDLayer : public Layer
 {
 public:
     void sunstoneCallback(Ref* pSender);
+    void update(float dt);
 
     virtual bool init();
     CREATE_FUNC(HUDLayer);
     
 private:
     void initMenu();
+    
+    Label* mDistance;
 };
 
 #endif // __HUD_LAYER_H__

@@ -12,6 +12,8 @@ bool HUDLayer::init()
     
     initMenu();
     
+    this->scheduleUpdate();
+    
     return true;
 }
 
@@ -31,13 +33,20 @@ void HUDLayer::initMenu()
     menu->setPosition(Vec2::ZERO);
     this->addChild(menu, 1);
     
-    auto label = Label::createWithTTF("Sunstone - A Cloudy Day", "fonts/Marker Felt.ttf", 24);
-    label->setPosition(Vec2(origin.x + visibleSize.width/2,
-                            origin.y + visibleSize.height - label->getContentSize().height));
-    this->addChild(label, 1);
+    mDistance = Label::createWithTTF("Distance from center: 0", "fonts/Marker Felt.ttf", 24);
+    mDistance->setPosition(Vec2(origin.x + visibleSize.width/2,
+                            origin.y + visibleSize.height - mDistance->getContentSize().height));
+    this->addChild(mDistance, 1);
 }
 
 void HUDLayer::sunstoneCallback(Ref* pSender)
 {
     MapLayer::Instance()->sunstoneCallback(pSender);
+}
+
+void HUDLayer::update(float dt)
+{
+    std::string str = StringUtils::format("Distance from center: %dm",
+                                          static_cast<int>(MapLayer::Instance()->getDistance()));
+    mDistance->setString(str.c_str());
 }

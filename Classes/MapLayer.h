@@ -15,12 +15,12 @@ public:
     static MapLayer* Instance() { return mInstance; }
 
     void sunstoneCallback(Ref* pSender);
-    
     void update(float dt);
     bool onTouchBegan(Touch* touch, Event* event);
     void onTouchMoved(Touch *touch, Event *event);
     void onTouchEnded(Touch *touch, Event *event);
     void onTouchCancelled(Touch *touch, Event *event);
+    float getDistance();
     
     virtual bool init();
     CREATE_FUNC(MapLayer);
@@ -32,6 +32,7 @@ private:
     static MapLayer* mInstance;
     EventListenerTouchOneByOne* mTouchListener;
     Sun* mSun;
+    Vec2 mStartPosition;
     bool mIsMoving;
     bool mMoveRight;
     bool mMoveUp;

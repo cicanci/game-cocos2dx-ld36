@@ -27,9 +27,10 @@ void MapLayer::initBackground()
 {
     auto visibleSize = Director::getInstance()->getVisibleSize();
     Vec2 origin = Director::getInstance()->getVisibleOrigin();
+    mStartPosition = Vec2(visibleSize.width/2 + origin.x, visibleSize.height/2 + origin.y);
     
     auto sprite = Sprite::create("sea.png");
-    sprite->setPosition(Vec2(visibleSize.width/2 + origin.x, visibleSize.height/2 + origin.y));
+    sprite->setPosition(mStartPosition);
     sprite->setScale(2);
     this->addChild(sprite, 0);
 }
@@ -66,18 +67,15 @@ bool MapLayer::onTouchBegan(Touch* touch, Event* event)
 {
     log("MapLayer::touchBegan");
     ShipLayer::Instance()->updateShip(touch->getLocation());
-    
-    auto visibleSize = Director::getInstance()->getVisibleSize();
-    mMoveRight = (touch->getLocation().x > visibleSize.width*0.5f) ? true : false;
-    mMoveUp = (touch->getLocation().y > visibleSize.height*0.5f) ? true : false;
-    mIsMoving = true;
-
     return true;
 }
 
 void MapLayer::onTouchMoved(Touch *touch, Event *event)
 {
-
+    auto visibleSize = Director::getInstance()->getVisibleSize();
+    mMoveRight = (touch->getLocation().x > visibleSize.width*0.5f) ? true : false;
+    mMoveUp = (touch->getLocation().y > visibleSize.height*0.5f) ? true : false;
+    mIsMoving = true;
 }
 
 void MapLayer::onTouchEnded(Touch *touch, Event *event)
@@ -117,4 +115,9 @@ void MapLayer::update(float dt)
         
         this->setPosition(position);
     }
+}
+
+float MapLayer::getDistance()
+{
+    return mStartPosition.distance(this->getPosition());
 }
