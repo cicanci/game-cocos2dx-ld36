@@ -20,8 +20,9 @@ public:
     void onTouchMoved(Touch *touch, Event *event);
     void onTouchEnded(Touch *touch, Event *event);
     void onTouchCancelled(Touch *touch, Event *event);
-    float getDistance();
     std::string getDirection() { return mDirectionName; }
+    int getDistanceFromCenter();
+    int getDistanceFromObjective();
     
     virtual bool init();
     CREATE_FUNC(MapLayer);
@@ -40,7 +41,7 @@ private:
     CardinalDirection mCardinalDirection;
     std::string mDirectionName;
     
-    const int SPEED = 50;
+    const int SPEED = 60;
 };
 
 #endif // __MAP_LAYER_H__

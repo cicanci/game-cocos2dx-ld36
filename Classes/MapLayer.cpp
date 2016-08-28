@@ -132,7 +132,14 @@ void MapLayer::update(float dt)
     }
 }
 
-float MapLayer::getDistance()
+int MapLayer::getDistanceFromCenter()
 {
-    return mStartPosition.distance(this->getPosition());
+    float distance = mStartPosition.distance(this->getPosition());
+    return static_cast<int>(distance);
 }
+
+int MapLayer::getDistanceFromObjective()
+{
+    return 1000;
+}
+

@@ -16,9 +16,11 @@ public:
     
 private:
     void initMenu();
+    Label* createLabel(int size, Color4B border);
     
     Label* mDistance;
     Label* mDirection;
+    Label* mTime;
 };
 
 #endif // __HUD_LAYER_H__

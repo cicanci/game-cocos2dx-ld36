@@ -22,6 +22,7 @@ public:
     
     void generate();
     Vec2 getSunPosition() { return mPossiblePositions[mSunIndex]; }
+    std::string getSunTime() { return mPossibleTime[mTimeIndex]; }
     
     virtual bool init();
     CREATE_FUNC(SunLayer);
