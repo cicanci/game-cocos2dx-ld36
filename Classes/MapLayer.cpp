@@ -35,6 +35,8 @@ void MapLayer::initBackground()
 
 void MapLayer::sunstoneCallback(Ref* pSender)
 {
+    SunLayer::Instance()->generate();
+    
     if (!SunstoneLayer::Instance()->isVisible())
     {
         _eventDispatcher->removeEventListener(mTouchListener);

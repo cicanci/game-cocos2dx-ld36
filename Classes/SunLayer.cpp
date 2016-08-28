@@ -22,6 +22,11 @@ bool SunLayer::init()
     possiblePositions[7] = Vec2(visibleSize.width*0.5f, 0);
     mPossiblePositions = possiblePositions;
     
+    std::vector<std::string> possibleTime(2);
+    possibleTime[0] = "Sunrise";
+    possibleTime[1] = "Sunset";
+    mPossibleTime = possibleTime;
+    
     generate();
     initClouds();
 
@@ -30,9 +35,18 @@ bool SunLayer::init()
 
 void SunLayer::generate()
 {
-    int dice_roll = random(0, 8);
-    mSunPosition = mPossiblePositions[dice_roll];
-    log("Sun is at [%d] %f, %f", dice_roll, mSunPosition.x, mSunPosition.y);
+    mTimeIndex = random(0, 1);
+    mSunIndex = random(0, 7);
+    mEast = (mTimeIndex == 0) ? mSunIndex : (mSunIndex + 4) % 8;
+    mWest = (mTimeIndex == 0) ? (mSunIndex + 4) % 8 : mSunIndex;
+    mNorth = (mTimeIndex == 0) ? (mSunIndex + 6) % 8 : (mSunIndex + 2) % 8;
+    mSouth = (mTimeIndex == 0) ? (mSunIndex + 2) % 8 : (mSunIndex + 6) % 8;
+    
+    log("Time is %s", mPossibleTime[mTimeIndex].c_str());
+    log("Sun points to EAST at (%f, %f)", mPossiblePositions[mEast].x, mPossiblePositions[mEast].y);
+    log("Sun points to WEST at (%f, %f)", mPossiblePositions[mWest].x, mPossiblePositions[mWest].y);
+    log("Sun points to NORTH at (%f, %f)", mPossiblePositions[mNorth].x, mPossiblePositions[mNorth].y);
+    log("Sun points to SOUTH at (%f, %f)", mPossiblePositions[mSouth].x, mPossiblePositions[mSouth].y);
 }
 
 void SunLayer::initClouds()

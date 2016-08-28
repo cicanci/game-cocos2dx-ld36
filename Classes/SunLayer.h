@@ -13,7 +13,7 @@ public:
     static SunLayer* Instance() { return mInstance; }
     
     void generate();
-    Vec2 getSunPosition() { return mSunPosition; }
+    Vec2 getSunPosition() { return mPossiblePositions[mSunIndex]; }
     
     virtual bool init();
     CREATE_FUNC(SunLayer);
@@ -23,8 +23,15 @@ private:
     Sprite* createCloud();
 
     static SunLayer* mInstance;
-    Vec2 mSunPosition;
     std::vector<Vec2> mPossiblePositions;
+    std::vector<std::string> mPossibleTime;
+    int mSunIndex;
+    int mTimeIndex;
+    int mEast;
+    int mWest;
+    int mNorth;
+    int mSouth;
+
 };
 
 #endif // __SUN_H__
