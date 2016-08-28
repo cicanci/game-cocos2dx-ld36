@@ -14,7 +14,7 @@ bool MapLayer::init()
     
     initTouchEvent();
     initBackground();
-    initDirection();
+    mStartPosition = Vec2(0, 0);
 
     this->scheduleUpdate();
     
@@ -39,30 +39,16 @@ void MapLayer::initBackground()
 {
     auto visibleSize = Director::getInstance()->getVisibleSize();
     Vec2 origin = Director::getInstance()->getVisibleOrigin();
-    mStartPosition = Vec2(visibleSize.width/2 + origin.x, visibleSize.height/2 + origin.y);
+    mMapPosition = Vec2(visibleSize.width/2 + origin.x, visibleSize.height/2 + origin.y);
     
     auto sprite = Sprite::create("sea.png");
-    sprite->setPosition(mStartPosition);
+    sprite->setPosition(mMapPosition);
     sprite->setScale(2);
     this->addChild(sprite, 0);
 }
 
-void MapLayer::initDirection()
-{
-    std::vector<std::string> directions(4);
-    directions[0] = "EAST";
-    directions[1] = "WEST";
-    directions[2] = "NORTH";
-    directions[3] = "SOUTH";
-    
-    mCardinalDirection = static_cast<CardinalDirection>(random(0, 3));
-    mDirectionName = directions[mCardinalDirection];
-}
-
 void MapLayer::sunstoneCallback(Ref* pSender)
 {
-    SunLayer::Instance()->generate();
-    
     if (!SunstoneLayer::Instance()->isVisible())
     {
         _eventDispatcher->removeEventListener(mTouchListener);
@@ -140,6 +126,16 @@ int MapLayer::getDistanceFromCenter()
 
 int MapLayer::getDistanceFromObjective()
 {
-    return 1000;
+    float distance = mStartPosition.distance(mObjectivePosition);
+    return static_cast<int>(distance);
+}
+
+void MapLayer::setObjectivePosition(Vec2 position)
+{
+    mObjectivePosition = position - mMapPosition;
+    
+    auto sprite = Sprite::create("dot.png");
+    sprite->setPosition(position);
+    this->addChild(sprite);
 }
 

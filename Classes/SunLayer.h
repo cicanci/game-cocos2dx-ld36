@@ -23,6 +23,7 @@ public:
     void generate();
     Vec2 getSunPosition() { return mPossiblePositions[mSunIndex]; }
     std::string getSunTime() { return mPossibleTime[mTimeIndex]; }
+    std::string getDirection() { return mDirectionName; }
     
     virtual bool init();
     CREATE_FUNC(SunLayer);
@@ -34,6 +35,9 @@ private:
     static SunLayer* mInstance;
     std::vector<Vec2> mPossiblePositions;
     std::vector<std::string> mPossibleTime;
+    std::string mDirectionName;
+    CardinalDirection mCardinalDirection;
+    Vec2 mObjectivePosition;
     int mSunIndex;
     int mTimeIndex;
     int mEast;

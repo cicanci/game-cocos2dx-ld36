@@ -1,5 +1,7 @@
 #include "SunLayer.h"
 
+#include "MapLayer.h"
+
 SunLayer* SunLayer::mInstance = 0;
 
 bool SunLayer::init()
@@ -48,6 +50,31 @@ void SunLayer::generate()
     log("Sun points to WEST at (%f, %f)", mPossiblePositions[mWest].x, mPossiblePositions[mWest].y);
     log("Sun points to NORTH at (%f, %f)", mPossiblePositions[mNorth].x, mPossiblePositions[mNorth].y);
     log("Sun points to SOUTH at (%f, %f)", mPossiblePositions[mSouth].x, mPossiblePositions[mSouth].y);
+    
+    mCardinalDirection = static_cast<CardinalDirection>(random(0, 3));
+    switch (mCardinalDirection)
+    {
+        case EAST:
+            mDirectionName = "EAST";
+            mObjectivePosition = mPossiblePositions[mEast];
+            break;
+        case WEST:
+            mDirectionName = "WEST";
+            mObjectivePosition = mPossiblePositions[mWest];
+            break;
+        case NORTH:
+            mDirectionName = "NORTH";
+            mObjectivePosition = mPossiblePositions[mNorth];
+            break;
+        case SOUTH:
+            mDirectionName = "SOUTH";
+            mObjectivePosition = mPossiblePositions[mSouth];
+            break;
+        default:
+            break;
+    }
+    
+    MapLayer::Instance()->setObjectivePosition(mObjectivePosition);
 }
 
 void SunLayer::initClouds()

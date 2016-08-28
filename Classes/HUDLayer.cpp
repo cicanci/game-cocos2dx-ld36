@@ -45,6 +45,15 @@ void HUDLayer::initMenu()
     mTime = createLabel(14, Color4B::BLACK);
     mTime->setPosition(Vec2(origin.x + visibleSize.width*0.5f,
                                 mDistance->getPosition().y - mDistance->getContentSize().height));
+    
+    // Update text
+    std::string direction = StringUtils::format("Objective: Go %s, %dm",
+                                                SunLayer::Instance()->getDirection().c_str(),
+                                                MapLayer::Instance()->getDistanceFromObjective());
+    mDirection->setString(direction.c_str());
+    
+    std::string time = StringUtils::format("Sun position: %s", SunLayer::Instance()->getSunTime().c_str());
+    mTime->setString(time.c_str());
 }
 
 Label* HUDLayer::createLabel(int size, Color4B border)
@@ -65,12 +74,4 @@ void HUDLayer::update(float dt)
     std::string distance = StringUtils::format("Distance from center: %dm",
                                           MapLayer::Instance()->getDistanceFromCenter());
     mDistance->setString(distance.c_str());
-    
-    std::string direction = StringUtils::format("Objective: Go %s, %dm",
-                                                MapLayer::Instance()->getDirection().c_str(),
-                                                MapLayer::Instance()->getDistanceFromObjective());
-    mDirection->setString(direction.c_str());
-    
-    std::string time = StringUtils::format("Sun position: %s", SunLayer::Instance()->getSunTime().c_str());
-    mTime->setString(time.c_str());
 }

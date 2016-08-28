@@ -20,7 +20,7 @@ public:
     void onTouchMoved(Touch *touch, Event *event);
     void onTouchEnded(Touch *touch, Event *event);
     void onTouchCancelled(Touch *touch, Event *event);
-    std::string getDirection() { return mDirectionName; }
+    void setObjectivePosition(Vec2 position);
     int getDistanceFromCenter();
     int getDistanceFromObjective();
     
@@ -30,16 +30,15 @@ public:
 private:
     void initTouchEvent();
     void initBackground();
-    void initDirection();
     
     static MapLayer* mInstance;
     EventListenerTouchOneByOne* mTouchListener;
     Vec2 mStartPosition;
+    Vec2 mMapPosition;
+    Vec2 mObjectivePosition;
     bool mIsMoving;
     bool mMoveRight;
     bool mMoveUp;
-    CardinalDirection mCardinalDirection;
-    std::string mDirectionName;
     
     const int SPEED = 60;
 };
