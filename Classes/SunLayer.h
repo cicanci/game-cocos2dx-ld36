@@ -5,6 +5,14 @@
 
 USING_NS_CC;
 
+typedef enum eCardinalDirection
+{
+    EAST,
+    WEST,
+    NORTH,
+    SOUTH
+} CardinalDirection;
+
 class SunLayer : public Layer
 {
 public:

@@ -42,7 +42,8 @@ void SunLayer::generate()
     mNorth = (mTimeIndex == 0) ? (mSunIndex + 6) % 8 : (mSunIndex + 2) % 8;
     mSouth = (mTimeIndex == 0) ? (mSunIndex + 2) % 8 : (mSunIndex + 6) % 8;
     
-    log("Time is %s", mPossibleTime[mTimeIndex].c_str());
+    log("%s at (%f, %f)", mPossibleTime[mTimeIndex].c_str(),
+        mPossiblePositions[mSunIndex].x, mPossiblePositions[mSunIndex].y);
     log("Sun points to EAST at (%f, %f)", mPossiblePositions[mEast].x, mPossiblePositions[mEast].y);
     log("Sun points to WEST at (%f, %f)", mPossiblePositions[mWest].x, mPossiblePositions[mWest].y);
     log("Sun points to NORTH at (%f, %f)", mPossiblePositions[mNorth].x, mPossiblePositions[mNorth].y);

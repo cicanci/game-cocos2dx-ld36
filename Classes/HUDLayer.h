@@ -18,6 +18,7 @@ private:
     void initMenu();
     
     Label* mDistance;
+    Label* mDirection;
 };
 
 #endif // __HUD_LAYER_H__

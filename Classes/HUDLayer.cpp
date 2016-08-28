@@ -26,18 +26,24 @@ void HUDLayer::initMenu()
                                            "buttonSunstone.png",
                                            CC_CALLBACK_1(HUDLayer::sunstoneCallback, this));
     
-    closeItem->setPosition(Vec2(origin.x + visibleSize.width - closeItem->getContentSize().width/2 ,
-                                origin.y + closeItem->getContentSize().height/2));
+    closeItem->setPosition(Vec2(origin.x + visibleSize.width - closeItem->getContentSize().width*0.5f,
+                                origin.y + closeItem->getContentSize().height*0.5f));
     
     auto menu = Menu::create(closeItem, NULL);
     menu->setPosition(Vec2::ZERO);
     this->addChild(menu, 1);
     
     mDistance = Label::createWithTTF("Distance from center: 0", "fonts/Marker Felt.ttf", 24);
-    mDistance->setPosition(Vec2(origin.x + visibleSize.width/2,
+    mDistance->setPosition(Vec2(origin.x + visibleSize.width*0.5f,
                                 origin.y + visibleSize.height - mDistance->getContentSize().height));
     mDistance->enableOutline(Color4B::BLACK, 1);
     this->addChild(mDistance, 1);
+    
+    mDirection = Label::createWithTTF("Go: NONE", "fonts/Marker Felt.ttf", 14);
+    mDirection->setPosition(Vec2(origin.x + visibleSize.width*0.5f,
+                                 mDistance->getPosition().y - mDistance->getContentSize().height));
+    mDirection->enableOutline(Color4B::RED, 1);
+    this->addChild(mDirection, 1);
 }
 
 void HUDLayer::sunstoneCallback(Ref* pSender)
@@ -47,7 +53,10 @@ void HUDLayer::sunstoneCallback(Ref* pSender)
 
 void HUDLayer::update(float dt)
 {
-    std::string str = StringUtils::format("Distance from center: %dm",
+    std::string distance = StringUtils::format("Distance from center: %dm",
                                           static_cast<int>(MapLayer::Instance()->getDistance()));
-    mDistance->setString(str.c_str());
+    mDistance->setString(distance.c_str());
+    
+    std::string direction = StringUtils::format("Go: %s", MapLayer::Instance()->getDirection().c_str());
+    mDirection->setString(direction.c_str());
 }

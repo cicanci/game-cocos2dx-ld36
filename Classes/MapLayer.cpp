@@ -1,7 +1,6 @@
 #include "MapLayer.h"
 
 #include "ShipLayer.h"
-#include "SunLayer.h"
 #include "SunstoneLayer.h"
 
 MapLayer* MapLayer::mInstance = 0;
@@ -15,38 +14,11 @@ bool MapLayer::init()
     
     initTouchEvent();
     initBackground();
+    initDirection();
 
     this->scheduleUpdate();
     
     return true;
-}
-
-void MapLayer::initBackground()
-{
-    auto visibleSize = Director::getInstance()->getVisibleSize();
-    Vec2 origin = Director::getInstance()->getVisibleOrigin();
-    mStartPosition = Vec2(visibleSize.width/2 + origin.x, visibleSize.height/2 + origin.y);
-    
-    auto sprite = Sprite::create("sea.png");
-    sprite->setPosition(mStartPosition);
-    sprite->setScale(2);
-    this->addChild(sprite, 0);
-}
-
-void MapLayer::sunstoneCallback(Ref* pSender)
-{
-    SunLayer::Instance()->generate();
-    
-    if (!SunstoneLayer::Instance()->isVisible())
-    {
-        _eventDispatcher->removeEventListener(mTouchListener);
-    }
-    else
-    {
-        _eventDispatcher->addEventListenerWithSceneGraphPriority(mTouchListener, this);
-    }
-
-    SunstoneLayer::Instance()->show(SunLayer::Instance()->getSunPosition());
 }
 
 void MapLayer::initTouchEvent()
@@ -62,6 +34,47 @@ void MapLayer::initTouchEvent()
 
     _eventDispatcher->addEventListenerWithSceneGraphPriority(mTouchListener, this);
 }
+
+void MapLayer::initBackground()
+{
+    auto visibleSize = Director::getInstance()->getVisibleSize();
+    Vec2 origin = Director::getInstance()->getVisibleOrigin();
+    mStartPosition = Vec2(visibleSize.width/2 + origin.x, visibleSize.height/2 + origin.y);
+    
+    auto sprite = Sprite::create("sea.png");
+    sprite->setPosition(mStartPosition);
+    sprite->setScale(2);
+    this->addChild(sprite, 0);
+}
+
+void MapLayer::initDirection()
+{
+    std::vector<std::string> directions(4);
+    directions[0] = "EAST";
+    directions[1] = "WEST";
+    directions[2] = "NORTH";
+    directions[3] = "SOUTH";
+    
+    mCardinalDirection = static_cast<CardinalDirection>(random(0, 3));
+    mDirectionName = directions[mCardinalDirection];
+}
+
+void MapLayer::sunstoneCallback(Ref* pSender)
+{
+    SunLayer::Instance()->generate();
+    
+    if (!SunstoneLayer::Instance()->isVisible())
+    {
+        _eventDispatcher->removeEventListener(mTouchListener);
+    }
+    else
+    {
+        _eventDispatcher->addEventListenerWithSceneGraphPriority(mTouchListener, this);
+    }
+    
+    SunstoneLayer::Instance()->show(SunLayer::Instance()->getSunPosition());
+}
+
 
 bool MapLayer::onTouchBegan(Touch* touch, Event* event)
 {

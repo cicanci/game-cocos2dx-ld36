@@ -3,6 +3,8 @@
 
 #include "cocos2d.h"
 
+#include "SunLayer.h"
+
 USING_NS_CC;
 
 class MapLayer : public Layer
@@ -19,6 +21,7 @@ public:
     void onTouchEnded(Touch *touch, Event *event);
     void onTouchCancelled(Touch *touch, Event *event);
     float getDistance();
+    std::string getDirection() { return mDirectionName; }
     
     virtual bool init();
     CREATE_FUNC(MapLayer);
@@ -26,6 +29,7 @@ public:
 private:
     void initTouchEvent();
     void initBackground();
+    void initDirection();
     
     static MapLayer* mInstance;
     EventListenerTouchOneByOne* mTouchListener;
@@ -33,6 +37,8 @@ private:
     bool mIsMoving;
     bool mMoveRight;
     bool mMoveUp;
+    CardinalDirection mCardinalDirection;
+    std::string mDirectionName;
     
     const int SPEED = 50;
 };
