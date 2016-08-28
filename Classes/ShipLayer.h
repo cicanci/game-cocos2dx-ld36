@@ -13,6 +13,7 @@ public:
     static ShipLayer* Instance() { return mInstance; }
 
     void updateShip(Vec2 touch);
+    Sprite* getShip() { return mShip; }
     
     virtual bool init();
     CREATE_FUNC(ShipLayer);
@@ -20,6 +21,7 @@ public:
 private:
     static ShipLayer* mInstance;
     Sprite* mShip;
+
 };
 
 #endif // __SHIP_LAYER_H__

@@ -31,10 +31,12 @@ public:
 private:
     void initTouchEvent();
     void initBackground();
+    void checkCollision();
     
     static MapLayer* mInstance;
     EventListenerTouchOneByOne* mTouchListener;
     Sprite* mIsland;
+    Sprite* mShipDebug;
     Vec2 mStartPosition;
     Vec2 mMapPosition;
     Vec2 mObjectivePosition;

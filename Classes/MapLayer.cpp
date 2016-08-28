@@ -39,7 +39,7 @@ void MapLayer::initBackground()
 {
     auto visibleSize = Director::getInstance()->getVisibleSize();
     Vec2 origin = Director::getInstance()->getVisibleOrigin();
-    mMapPosition = Vec2(visibleSize.width/2 + origin.x, visibleSize.height/2 + origin.y);
+    mMapPosition = Vec2(visibleSize.width*0.5f + origin.x, visibleSize.height*0.5f + origin.y);
     
     auto sprite = Sprite::create("sea.png");
     sprite->setPosition(mMapPosition);
@@ -49,6 +49,14 @@ void MapLayer::initBackground()
     mIsland = Sprite::create("island.png");
     mIsland->setVisible(false);
     this->addChild(mIsland, 1);
+    
+    Vec2 position = Vec2(this->getPosition().x + visibleSize.width*0.5f,
+                         this->getPosition().y + visibleSize.height*0.5f + 25);
+    Rect ship = Rect(position.x, position.y, 75, 25);
+    mShipDebug = Sprite::create("debug.png", ship);
+    mShipDebug->setPosition(position);
+    mShipDebug->setVisible(false);
+    this->addChild(mShipDebug, 2);
 }
 
 void MapLayer::showSunstone()
@@ -102,7 +110,7 @@ void MapLayer::update(float dt)
 {
     if (mIsMoving)
     {
-        Vec2 position = this->getPosition();
+        Vec2 position = Vec2::ZERO;
 
         if (mMoveRight)
         {
@@ -122,7 +130,28 @@ void MapLayer::update(float dt)
             position.y += SPEED * dt;
         }
         
-        this->setPosition(position);
+        this->setPosition(this->getPosition() + position);
+        mShipDebug->setPosition(mShipDebug->getPosition() + ((-1)*position));
+        
+        checkCollision();
+    }
+}
+
+void MapLayer::checkCollision()
+{
+    Rect island = Rect(mIsland->getPosition().x,
+                       mIsland->getPosition().y,
+                       mIsland->getContentSize().width,
+                       mIsland->getContentSize().height);
+    
+    Rect ship = Rect(mShipDebug->getPosition().x,
+                     mShipDebug->getPosition().y,
+                     mShipDebug->getContentSize().width,
+                     mShipDebug->getContentSize().height);
+
+    if (island.intersectsRect(ship))
+    {
+        log("BIRL!!!!!!!");
     }
 }
 
