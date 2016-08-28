@@ -53,7 +53,7 @@ Sprite* SunLayer::createCloud()
 {
     auto cloud = Sprite::create("cloud.png");
     
-    auto move = MoveBy::create(random(50, 100), Vec2(cloud->getPosition().x + 10, cloud->getPosition().y + 10));
+    auto move = MoveBy::create(random(20, 40), Vec2(cloud->getPosition().x + 10, cloud->getPosition().y + 10));
     auto move_back = move->reverse();
     
     // create a BounceIn Ease Action
