@@ -45,9 +45,13 @@ void MapLayer::initBackground()
     sprite->setPosition(mMapPosition);
     sprite->setScale(2);
     this->addChild(sprite, 0);
+    
+    mIsland = Sprite::create("island.png");
+    mIsland->setVisible(false);
+    this->addChild(mIsland, 1);
 }
 
-void MapLayer::sunstoneCallback(Ref* pSender)
+void MapLayer::showSunstone()
 {
     if (!SunstoneLayer::Instance()->isVisible())
     {
@@ -61,6 +65,10 @@ void MapLayer::sunstoneCallback(Ref* pSender)
     SunstoneLayer::Instance()->show(SunLayer::Instance()->getSunPosition());
 }
 
+void MapLayer::reloadLevel()
+{
+    SunLayer::Instance()->generate();
+}
 
 bool MapLayer::onTouchBegan(Touch* touch, Event* event)
 {
@@ -134,8 +142,10 @@ void MapLayer::setObjectivePosition(Vec2 position)
 {
     mObjectivePosition = position - mMapPosition;
     
-    auto sprite = Sprite::create("dot.png");
-    sprite->setPosition(position);
-    this->addChild(sprite);
+    if (!mIsland->isVisible())
+    {
+        mIsland->setVisible(true);
+    }
+    mIsland->setPosition(position);
 }
 

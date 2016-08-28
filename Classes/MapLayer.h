@@ -14,7 +14,8 @@ public:
     ~MapLayer() { mInstance = NULL; }
     static MapLayer* Instance() { return mInstance; }
 
-    void sunstoneCallback(Ref* pSender);
+    void showSunstone();
+    void reloadLevel();
     void update(float dt);
     bool onTouchBegan(Touch* touch, Event* event);
     void onTouchMoved(Touch *touch, Event *event);
@@ -33,6 +34,7 @@ private:
     
     static MapLayer* mInstance;
     EventListenerTouchOneByOne* mTouchListener;
+    Sprite* mIsland;
     Vec2 mStartPosition;
     Vec2 mMapPosition;
     Vec2 mObjectivePosition;

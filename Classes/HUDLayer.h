@@ -9,6 +9,7 @@ class HUDLayer : public Layer
 {
 public:
     void sunstoneCallback(Ref* pSender);
+    void reloadCallback(Ref* pSender);
     void update(float dt);
 
     virtual bool init();
@@ -16,6 +17,8 @@ public:
     
 private:
     void initMenu();
+    void initText();
+    void updateText();
     Label* createLabel(int size, Color4B border);
     
     Label* mDistance;
