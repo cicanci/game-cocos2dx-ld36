@@ -2,6 +2,7 @@
 
 #include "HUDLayer.h"
 #include "MapLayer.h"
+#include "MessageLayer.h"
 #include "ShipLayer.h"
 #include "SunLayer.h"
 #include "SunstoneLayer.h"
@@ -24,6 +25,10 @@ Scene* GameScene::createScene()
     
     auto hud = HUDLayer::create();
     scene->addChild(hud);
+    
+    auto message = MessageLayer::create();
+    message->setVisible(false);
+    scene->addChild(message);
     
     auto sunstone = SunstoneLayer::create();
     sunstone->setVisible(false);

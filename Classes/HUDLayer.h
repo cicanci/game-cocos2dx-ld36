@@ -8,9 +8,14 @@ USING_NS_CC;
 class HUDLayer : public Layer
 {
 public:
+    HUDLayer() { mInstance = this; }
+    ~HUDLayer() { mInstance = NULL; }
+    static HUDLayer* Instance() { return mInstance; }
+    
     void sunstoneCallback(Ref* pSender);
     void reloadCallback(Ref* pSender);
     void update(float dt);
+    void updateText();
 
     virtual bool init();
     CREATE_FUNC(HUDLayer);
@@ -18,9 +23,9 @@ public:
 private:
     void initMenu();
     void initText();
-    void updateText();
     Label* createLabel(int size, Color4B border);
     
+    static HUDLayer* mInstance;
     Label* mDistance;
     Label* mDirection;
     Label* mTime;

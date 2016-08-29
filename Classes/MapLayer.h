@@ -24,6 +24,7 @@ public:
     void setObjectivePosition(Vec2 position);
     int getDistanceFromCenter();
     int getDistanceFromObjective();
+    void enableTouchListener(bool enable);
     
     virtual bool init();
     CREATE_FUNC(MapLayer);

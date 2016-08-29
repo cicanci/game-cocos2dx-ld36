@@ -94,6 +94,16 @@
 		DD5B5B3A1D736E400025BA32 /* island.png in Resources */ = {isa = PBXBuildFile; fileRef = DD5B5B381D736E400025BA32 /* island.png */; };
 		DD5B5B3C1D73890E0025BA32 /* debug.png in Resources */ = {isa = PBXBuildFile; fileRef = DD5B5B3B1D73890E0025BA32 /* debug.png */; };
 		DD5B5B3D1D73890E0025BA32 /* debug.png in Resources */ = {isa = PBXBuildFile; fileRef = DD5B5B3B1D73890E0025BA32 /* debug.png */; };
+		DD5B5B3F1D73A0D50025BA32 /* messageBox.png in Resources */ = {isa = PBXBuildFile; fileRef = DD5B5B3E1D73A0D50025BA32 /* messageBox.png */; };
+		DD5B5B401D73A0D50025BA32 /* messageBox.png in Resources */ = {isa = PBXBuildFile; fileRef = DD5B5B3E1D73A0D50025BA32 /* messageBox.png */; };
+		DD5B5B431D73A0E70025BA32 /* MessageLayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DD5B5B411D73A0E70025BA32 /* MessageLayer.cpp */; };
+		DD5B5B441D73A0E70025BA32 /* MessageLayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DD5B5B411D73A0E70025BA32 /* MessageLayer.cpp */; };
+		DD5B5B471D73A3F60025BA32 /* buttonAdd.png in Resources */ = {isa = PBXBuildFile; fileRef = DD5B5B451D73A3F60025BA32 /* buttonAdd.png */; };
+		DD5B5B481D73A3F60025BA32 /* buttonAdd.png in Resources */ = {isa = PBXBuildFile; fileRef = DD5B5B451D73A3F60025BA32 /* buttonAdd.png */; };
+		DD5B5B491D73A3F60025BA32 /* buttonRemove.png in Resources */ = {isa = PBXBuildFile; fileRef = DD5B5B461D73A3F60025BA32 /* buttonRemove.png */; };
+		DD5B5B4A1D73A3F60025BA32 /* buttonRemove.png in Resources */ = {isa = PBXBuildFile; fileRef = DD5B5B461D73A3F60025BA32 /* buttonRemove.png */; };
+		DD5B5B4C1D73B3730025BA32 /* buttonClose.png in Resources */ = {isa = PBXBuildFile; fileRef = DD5B5B4B1D73B3730025BA32 /* buttonClose.png */; };
+		DD5B5B4D1D73B3730025BA32 /* buttonClose.png in Resources */ = {isa = PBXBuildFile; fileRef = DD5B5B4B1D73B3730025BA32 /* buttonClose.png */; };
 		ED545A7C1B68A1F400C3958E /* libiconv.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = ED545A7B1B68A1F400C3958E /* libiconv.dylib */; };
 		ED545A7E1B68A1FA00C3958E /* libiconv.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = ED545A7D1B68A1FA00C3958E /* libiconv.dylib */; };
 /* End PBXBuildFile section */
@@ -215,6 +225,12 @@
 		DD5B5B351D73697D0025BA32 /* buttonReload.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = buttonReload.png; sourceTree = "<group>"; };
 		DD5B5B381D736E400025BA32 /* island.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = island.png; sourceTree = "<group>"; };
 		DD5B5B3B1D73890E0025BA32 /* debug.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = debug.png; sourceTree = "<group>"; };
+		DD5B5B3E1D73A0D50025BA32 /* messageBox.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = messageBox.png; sourceTree = "<group>"; };
+		DD5B5B411D73A0E70025BA32 /* MessageLayer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MessageLayer.cpp; sourceTree = "<group>"; };
+		DD5B5B421D73A0E70025BA32 /* MessageLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageLayer.h; sourceTree = "<group>"; };
+		DD5B5B451D73A3F60025BA32 /* buttonAdd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = buttonAdd.png; sourceTree = "<group>"; };
+		DD5B5B461D73A3F60025BA32 /* buttonRemove.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = buttonRemove.png; sourceTree = "<group>"; };
+		DD5B5B4B1D73B3730025BA32 /* buttonClose.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = buttonClose.png; sourceTree = "<group>"; };
 		ED545A7B1B68A1F400C3958E /* libiconv.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libiconv.dylib; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS8.4.sdk/usr/lib/libiconv.dylib; sourceTree = DEVELOPER_DIR; };
 		ED545A7D1B68A1FA00C3958E /* libiconv.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libiconv.dylib; path = usr/lib/libiconv.dylib; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
@@ -341,20 +357,24 @@
 		46880B7519C43A67006E1F66 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				DD5B5B3B1D73890E0025BA32 /* debug.png */,
-				DD5B5B381D736E400025BA32 /* island.png */,
-				DD5B5B351D73697D0025BA32 /* buttonReload.png */,
-				DD5B5B321D72B0E40025BA32 /* cloud.png */,
-				DD5B5B2F1D72995A0025BA32 /* sea.png */,
-				DD5B5B201D7221830025BA32 /* ship.png */,
-				DD5B5B191D720FF40025BA32 /* buttonSunstone.png */,
-				DD5B5B121D7149F40025BA32 /* dot.png */,
-				DD5B5B0D1D7149270025BA32 /* sunstone.png */,
 				521A8EA819F11F5000D177D7 /* fonts */,
 				3EACC98E19EE6D4300EB3C5E /* res */,
+				DD5B5B451D73A3F60025BA32 /* buttonAdd.png */,
+				DD5B5B4B1D73B3730025BA32 /* buttonClose.png */,
+				DD5B5B351D73697D0025BA32 /* buttonReload.png */,
+				DD5B5B461D73A3F60025BA32 /* buttonRemove.png */,
+				DD5B5B191D720FF40025BA32 /* buttonSunstone.png */,
 				46880B7619C43A67006E1F66 /* CloseNormal.png */,
 				46880B7719C43A67006E1F66 /* CloseSelected.png */,
+				DD5B5B321D72B0E40025BA32 /* cloud.png */,
+				DD5B5B3B1D73890E0025BA32 /* debug.png */,
+				DD5B5B121D7149F40025BA32 /* dot.png */,
 				46880B7A19C43A67006E1F66 /* HelloWorld.png */,
+				DD5B5B381D736E400025BA32 /* island.png */,
+				DD5B5B3E1D73A0D50025BA32 /* messageBox.png */,
+				DD5B5B2F1D72995A0025BA32 /* sea.png */,
+				DD5B5B201D7221830025BA32 /* ship.png */,
+				DD5B5B0D1D7149270025BA32 /* sunstone.png */,
 			);
 			name = Resources;
 			path = ../Resources;
@@ -371,6 +391,8 @@
 				DD5B5B2C1D728CEA0025BA32 /* HUDLayer.h */,
 				DD5B5B271D7222BD0025BA32 /* MapLayer.cpp */,
 				DD5B5B281D7222BD0025BA32 /* MapLayer.h */,
+				DD5B5B411D73A0E70025BA32 /* MessageLayer.cpp */,
+				DD5B5B421D73A0E70025BA32 /* MessageLayer.h */,
 				DD5B5B231D7221930025BA32 /* ShipLayer.cpp */,
 				DD5B5B241D7221930025BA32 /* ShipLayer.h */,
 				DD5B5B1C1D7210170025BA32 /* SunLayer.cpp */,
@@ -532,6 +554,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				DD5B5B361D73697D0025BA32 /* buttonReload.png in Resources */,
+				DD5B5B491D73A3F60025BA32 /* buttonRemove.png in Resources */,
+				DD5B5B3F1D73A0D50025BA32 /* messageBox.png in Resources */,
 				5087E78117EB970100C73F5D /* Icon-120.png in Resources */,
 				5087E78617EB970100C73F5D /* Icon-76.png in Resources */,
 				DD5B5B3C1D73890E0025BA32 /* debug.png in Resources */,
@@ -543,6 +567,7 @@
 				46880B8119C43A67006E1F66 /* HelloWorld.png in Resources */,
 				46880B7D19C43A67006E1F66 /* CloseSelected.png in Resources */,
 				5087E77D17EB970100C73F5D /* Default-568h@2x.png in Resources */,
+				DD5B5B471D73A3F60025BA32 /* buttonAdd.png in Resources */,
 				5087E78517EB970100C73F5D /* Icon-72.png in Resources */,
 				521A8E6519F0C34300D177D7 /* Default-736h@3x.png in Resources */,
 				521A8EA919F11F5000D177D7 /* fonts in Resources */,
@@ -560,6 +585,7 @@
 				DD5B5B391D736E400025BA32 /* island.png in Resources */,
 				521A8E6419F0C34300D177D7 /* Default-667h@2x.png in Resources */,
 				46880B7B19C43A67006E1F66 /* CloseNormal.png in Resources */,
+				DD5B5B4C1D73B3730025BA32 /* buttonClose.png in Resources */,
 				DD5B5B0E1D7149270025BA32 /* sunstone.png in Resources */,
 				DD5B5B131D7149F40025BA32 /* dot.png in Resources */,
 				50EF629717ECD46A001EB2F8 /* Icon-58.png in Resources */,
@@ -573,15 +599,19 @@
 				DD5B5B3A1D736E400025BA32 /* island.png in Resources */,
 				DD5B5B311D72995A0025BA32 /* sea.png in Resources */,
 				46880B8219C43A67006E1F66 /* HelloWorld.png in Resources */,
+				DD5B5B401D73A0D50025BA32 /* messageBox.png in Resources */,
 				DD5B5B1B1D720FF40025BA32 /* buttonSunstone.png in Resources */,
 				DD5B5B371D73697D0025BA32 /* buttonReload.png in Resources */,
 				DD5B5B3D1D73890E0025BA32 /* debug.png in Resources */,
+				DD5B5B481D73A3F60025BA32 /* buttonAdd.png in Resources */,
 				503AE0F817EB97AB00D1A890 /* Icon.icns in Resources */,
 				3EACC99019EE6D4300EB3C5E /* res in Resources */,
 				DD5B5B341D72B0E40025BA32 /* cloud.png in Resources */,
 				521A8EAA19F11F5000D177D7 /* fonts in Resources */,
 				46880B7C19C43A67006E1F66 /* CloseNormal.png in Resources */,
+				DD5B5B4A1D73A3F60025BA32 /* buttonRemove.png in Resources */,
 				46880B7E19C43A67006E1F66 /* CloseSelected.png in Resources */,
+				DD5B5B4D1D73B3730025BA32 /* buttonClose.png in Resources */,
 				DD5B5B221D7221830025BA32 /* ship.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -595,6 +625,7 @@
 			files = (
 				DD5B5B161D714B340025BA32 /* SunstoneLayer.cpp in Sources */,
 				DD5B5B291D7222BD0025BA32 /* MapLayer.cpp in Sources */,
+				DD5B5B431D73A0E70025BA32 /* MessageLayer.cpp in Sources */,
 				46880B8819C43A87006E1F66 /* AppDelegate.cpp in Sources */,
 				DD5B5B1E1D7210170025BA32 /* SunLayer.cpp in Sources */,
 				46880B8A19C43A87006E1F66 /* GameScene.cpp in Sources */,
@@ -614,6 +645,7 @@
 				46880B8919C43A87006E1F66 /* AppDelegate.cpp in Sources */,
 				DD5B5B2A1D7222BD0025BA32 /* MapLayer.cpp in Sources */,
 				DD5B5B2E1D728CEA0025BA32 /* HUDLayer.cpp in Sources */,
+				DD5B5B441D73A0E70025BA32 /* MessageLayer.cpp in Sources */,
 				503AE10517EB98FF00D1A890 /* main.cpp in Sources */,
 				DD5B5B261D7221930025BA32 /* ShipLayer.cpp in Sources */,
 				46880B8B19C43A87006E1F66 /* GameScene.cpp in Sources */,

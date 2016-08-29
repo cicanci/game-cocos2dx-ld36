@@ -14,6 +14,10 @@ public:
 
     void updateShip(Vec2 touch);
     Sprite* getShip() { return mShip; }
+    void addSpeedUpgrade() { mSpeedUpgrade += 10; }
+    int getSpeedUpgrade() { return mSpeedUpgrade; }
+    void addBonusUpgrade() { mBonusUpgrade += 10; }
+    int getBonusUpgrade() { return mBonusUpgrade; }
     
     virtual bool init();
     CREATE_FUNC(ShipLayer);
@@ -22,6 +26,8 @@ private:
     static ShipLayer* mInstance;
     Sprite* mShip;
 
+    int mSpeedUpgrade;
+    int mBonusUpgrade;
 };
 
 #endif // __SHIP_LAYER_H__

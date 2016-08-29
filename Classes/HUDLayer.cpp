@@ -4,6 +4,8 @@
 #include "SunLayer.h"
 #include "SunstoneLayer.h"
 
+HUDLayer* HUDLayer::mInstance = 0;
+
 bool HUDLayer::init()
 {
     if (!Layer::init())
@@ -91,7 +93,6 @@ void HUDLayer::sunstoneCallback(Ref* pSender)
 void HUDLayer::reloadCallback(Ref* pSender)
 {
     MapLayer::Instance()->reloadLevel();
-    updateText();
 }
 
 void HUDLayer::update(float dt)

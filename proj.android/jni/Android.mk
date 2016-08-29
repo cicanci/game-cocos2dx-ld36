@@ -16,6 +16,7 @@ LOCAL_SRC_FILES := hellocpp/main.cpp \
                    ../../Classes/GameScene.cpp \
                    ../../Classes/HUDLayer.cpp \
                    ../../Classes/MapLayer.cpp \
+                   ../../Classes/MessageLayer.cpp \
                    ../../Classes/ShipLayer.cpp \
                    ../../Classes/SunLayer.cpp \
                    ../../Classes/SunstoneLayer.cpp

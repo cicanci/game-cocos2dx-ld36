@@ -1,5 +1,7 @@
 #include "MapLayer.h"
 
+#include "HUDLayer.h"
+#include "MessageLayer.h"
 #include "ShipLayer.h"
 #include "SunstoneLayer.h"
 
@@ -61,27 +63,21 @@ void MapLayer::initBackground()
 
 void MapLayer::showSunstone()
 {
-    if (!SunstoneLayer::Instance()->isVisible())
-    {
-        _eventDispatcher->removeEventListener(mTouchListener);
-    }
-    else
-    {
-        _eventDispatcher->addEventListenerWithSceneGraphPriority(mTouchListener, this);
-    }
-    
+    enableTouchListener(SunstoneLayer::Instance()->isVisible());
     SunstoneLayer::Instance()->show(SunLayer::Instance()->getSunPosition());
 }
 
 void MapLayer::reloadLevel()
 {
     SunLayer::Instance()->generate();
+    HUDLayer::Instance()->updateText();
 }
 
 bool MapLayer::onTouchBegan(Touch* touch, Event* event)
 {
     log("MapLayer::touchBegan");
     onTouchMoved(touch, event);
+    MessageLayer::Instance()->showMessage();
     return true;
 }
 
@@ -114,20 +110,20 @@ void MapLayer::update(float dt)
 
         if (mMoveRight)
         {
-            position.x -= SPEED * dt;
+            position.x -= (SPEED + ShipLayer::Instance()->getSpeedUpgrade()) * dt;
         }
         else
         {
-            position.x += SPEED * dt;
+            position.x += (SPEED + ShipLayer::Instance()->getSpeedUpgrade()) * dt;
         }
         
         if (mMoveUp)
         {
-            position.y -= SPEED * dt;
+            position.y -= (SPEED + ShipLayer::Instance()->getSpeedUpgrade()) * dt;
         }
         else
         {
-            position.y += SPEED * dt;
+            position.y += (SPEED + ShipLayer::Instance()->getSpeedUpgrade()) * dt;
         }
         
         this->setPosition(this->getPosition() + position);
@@ -152,6 +148,9 @@ void MapLayer::checkCollision()
     if (island.intersectsRect(ship))
     {
         log("BIRL!!!!!!!");
+        MessageLayer::Instance()->showMessage();
+        reloadLevel();
+        mIsMoving = false;
     }
 }
 
@@ -178,3 +177,14 @@ void MapLayer::setObjectivePosition(Vec2 position)
     mIsland->setPosition(position);
 }
 
+void MapLayer::enableTouchListener(bool enable)
+{
+    if (enable)
+    {
+        _eventDispatcher->addEventListenerWithSceneGraphPriority(mTouchListener, this);
+    }
+    else
+    {
+        _eventDispatcher->removeEventListener(mTouchListener);
+    }
+}

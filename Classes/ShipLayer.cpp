@@ -13,8 +13,11 @@ bool ShipLayer::init()
     Vec2 origin = Director::getInstance()->getVisibleOrigin();
     
     mShip = Sprite::create("ship.png");
-    mShip->setPosition(Vec2(visibleSize.width/2 + origin.x, visibleSize.height/2 + origin.y));
+    mShip->setPosition(Vec2(visibleSize.width*0.5f + origin.x, visibleSize.height*0.5f + origin.y));
     this->addChild(mShip, 1);
+    
+    mSpeedUpgrade = 0;
+    mBonusUpgrade = 0;
     
     return true;
 }
