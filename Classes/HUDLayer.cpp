@@ -53,24 +53,24 @@ void HUDLayer::initText()
     auto visibleSize = Director::getInstance()->getVisibleSize();
     Vec2 origin = Director::getInstance()->getVisibleOrigin();
     
-    mDirection = createLabel(24, Color4B::RED);
+    mDirection = createLabel(32, Color4B::RED);
     mDirection->setPosition(Vec2(origin.x + visibleSize.width*0.5f,
                                  origin.y + visibleSize.height - mDirection->getContentSize().height));
     
-    mDistance = createLabel(14, Color4B::BLACK);
+    mDistance = createLabel(18, Color4B::BLACK);
     mDistance->setPosition(Vec2(origin.x + visibleSize.width*0.5f,
                                 mDirection->getPosition().y - mDirection->getContentSize().height));
     
-    mTime = createLabel(14, Color4B::BLACK);
+    mTime = createLabel(18, Color4B::BLACK);
     mTime->setPosition(Vec2(origin.x + visibleSize.width*0.5f,
                             mDistance->getPosition().y - mDistance->getContentSize().height));
     
-    mCountDown = createLabel(12, Color4B::BLACK);
+    mCountDown = createLabel(18, Color4B::BLACK);
     mCountDown->setString("Time left: 000s");
     mCountDown->setPosition(Vec2(origin.x + mCountDown->getContentSize().width*0.5f,
                             origin.y + visibleSize.height - mCountDown->getContentSize().height));
     
-    mScore = createLabel(12, Color4B::BLACK);
+    mScore = createLabel(18, Color4B::BLACK);
     mScore->setString("Score: 000");
     mScore->setPosition(Vec2(origin.x + visibleSize.width - (mCountDown->getContentSize().width*0.5f),
                                  origin.y + visibleSize.height - mCountDown->getContentSize().height));
@@ -139,7 +139,7 @@ void HUDLayer::gameOver()
     auto visibleSize = Director::getInstance()->getVisibleSize();
     Vec2 origin = Director::getInstance()->getVisibleOrigin();
     
-    auto gameover = createLabel(32, Color4B::BLACK);
+    auto gameover = createLabel(42, Color4B::BLACK);
     std::string countdown = StringUtils::format("Game Over. Your score: %d", static_cast<int>(mScoreValue));
     gameover->setString(countdown.c_str());
     gameover->setPosition(Vec2(origin.x + visibleSize.width*0.5f, origin.y + visibleSize.height*0.5f));

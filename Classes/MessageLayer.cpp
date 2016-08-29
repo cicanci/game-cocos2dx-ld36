@@ -27,11 +27,11 @@ void MessageLayer::initMessage()
     
     mAddSpeed = MenuItemImage::create("buttonAdd.png", "buttonAdd.png",
                                       CC_CALLBACK_1(MessageLayer::addSpeedCallback, this));
-    mAddSpeed->setPosition(mMessageBox->getPosition() + Vec2(25, 0));
+    mAddSpeed->setPosition(mMessageBox->getPosition() + Vec2(50, 0));
     
     mAddBonus = MenuItemImage::create("buttonAdd.png", "buttonAdd.png",
                                       CC_CALLBACK_1(MessageLayer::addBonusCallback, this));
-    mAddBonus->setPosition(mMessageBox->getPosition() + Vec2(25, -50));
+    mAddBonus->setPosition(mMessageBox->getPosition() + Vec2(50, -50));
     
     mCloseMessage = MenuItemImage::create("buttonClose.png", "buttonClose.png",
                                       CC_CALLBACK_1(MessageLayer::closeCallback, this));
@@ -42,9 +42,9 @@ void MessageLayer::initMessage()
     menu->setPosition(Vec2::ZERO);
     this->addChild(menu, 1);
     
-    createLabel(20, Color4B::BLACK, "Upgrade your ship", mMessageBox->getPosition() - Vec2(50, -50));
-    mCurrentSpeed = createLabel(18, Color4B::BLACK, "Speed: +0", mMessageBox->getPosition() - Vec2(50, 0));
-    mCurrentBonus = createLabel(18, Color4B::BLACK, "Bonus: +0", mMessageBox->getPosition() - Vec2(50, 50));
+    createLabel(24, Color4B::BLACK, "Upgrade your ship", mMessageBox->getPosition() - Vec2(50, -50));
+    mCurrentSpeed = createLabel(24, Color4B::BLACK, "Speed: +0", mMessageBox->getPosition() - Vec2(50, 0));
+    mCurrentBonus = createLabel(24, Color4B::BLACK, "Bonus: +0", mMessageBox->getPosition() - Vec2(50, 50));
 }
 
 Label* MessageLayer::createLabel(int size, Color4B border, std::string text, Vec2 position)
@@ -61,6 +61,7 @@ void MessageLayer::addSpeedCallback(Ref *pSender)
     ShipLayer::Instance()->addSpeedUpgrade();
     mAddSpeed->setVisible(false);
     mAddBonus->setVisible(false);
+    mCloseMessage->setVisible(true);
     
     std::string speed = StringUtils::format("Speed: +%d", ShipLayer::Instance()->getSpeedUpgrade());
     mCurrentSpeed->setString(speed.c_str());
@@ -71,6 +72,7 @@ void MessageLayer::addBonusCallback(Ref *pSender)
     ShipLayer::Instance()->addBonusUpgrade();
     mAddBonus->setVisible(false);
     mAddSpeed->setVisible(false);
+    mCloseMessage->setVisible(true);
     
     std::string bonus = StringUtils::format("Bonus: +%d", ShipLayer::Instance()->getBonusUpgrade());
     mCurrentBonus->setString(bonus.c_str());
@@ -86,6 +88,7 @@ void MessageLayer::showMessage()
     this->setVisible(true);
     mAddBonus->setVisible(true);
     mAddSpeed->setVisible(true);
+    mCloseMessage->setVisible(false);
 }
 
 void MessageLayer::closeMessage()
