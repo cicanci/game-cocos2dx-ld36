@@ -24,6 +24,7 @@ public:
 private:
     void initMenu();
     void initText();
+    void gameOver();
     Label* createLabel(int size, Color4B border);
     
     static HUDLayer* mInstance;
@@ -34,8 +35,11 @@ private:
     Label* mTime;
     Label* mCountDown;
     Label* mScore;
+    MenuItemImage* mSunstoneButton;
+    MenuItemImage* mReloadButton;
     
     const int SCORE = 10;
+    const int GAME_TIME = 300;
 };
 
 #endif // __HUD_LAYER_H__

@@ -16,7 +16,7 @@ bool HUDLayer::init()
     
     initMenu();
     initText();
-    mCounter = 120;
+    mCounter = GAME_TIME;
     mScoreValue = 0;
     
     this->scheduleUpdate();
@@ -29,21 +29,21 @@ void HUDLayer::initMenu()
     auto visibleSize = Director::getInstance()->getVisibleSize();
     Vec2 origin = Director::getInstance()->getVisibleOrigin();
     
-    auto sunstone = MenuItemImage::create("buttonSunstone.png",
+    mSunstoneButton = MenuItemImage::create("buttonSunstone.png",
                                            "buttonSunstone.png",
                                            CC_CALLBACK_1(HUDLayer::sunstoneCallback, this));
     
-    sunstone->setPosition(Vec2(origin.x + visibleSize.width - sunstone->getContentSize().width*0.5f,
-                                origin.y + sunstone->getContentSize().height*0.5f));
+    mSunstoneButton->setPosition(Vec2(origin.x + visibleSize.width - mSunstoneButton->getContentSize().width*0.5f,
+                                origin.y + mSunstoneButton->getContentSize().height*0.5f));
     
-    auto reload = MenuItemImage::create("buttonReload.png",
+    mReloadButton = MenuItemImage::create("buttonReload.png",
                                         "buttonReload.png",
                                         CC_CALLBACK_1(HUDLayer::reloadCallback, this));
     
-    reload->setPosition(Vec2(origin.x + reload->getContentSize().width*0.5f,
-                               origin.y + reload->getContentSize().height*0.5f));
+    mReloadButton->setPosition(Vec2(origin.x + mReloadButton->getContentSize().width*0.5f,
+                               origin.y + mReloadButton->getContentSize().height*0.5f));
     
-    auto menu = Menu::create(sunstone, reload, NULL);
+    auto menu = Menu::create(mSunstoneButton, mReloadButton, NULL);
     menu->setPosition(Vec2::ZERO);
     this->addChild(menu, 1);
 }
@@ -110,19 +110,47 @@ void HUDLayer::reloadCallback(Ref* pSender)
 
 void HUDLayer::update(float dt)
 {
-    std::string distance = StringUtils::format("Distance from center: %dm",
-                                          MapLayer::Instance()->getDistanceFromCenter());
-    mDistance->setString(distance.c_str());
-    
-    mCounter -= dt;
-    std::string countdown = StringUtils::format("Time left: %ds", static_cast<int>(mCounter));
-    mCountDown->setString(countdown.c_str());
-    
-    std::string score = StringUtils::format("Score: %d", static_cast<int>(mScoreValue));
-    mScore->setString(score.c_str());
+    if (mCounter > 0)
+    {
+        std::string distance = StringUtils::format("Distance from center: %dm",
+                                                   MapLayer::Instance()->getDistanceFromCenter());
+        mDistance->setString(distance.c_str());
+        
+        mCounter -= dt;
+        std::string countdown = StringUtils::format("Time left: %ds", static_cast<int>(mCounter));
+        mCountDown->setString(countdown.c_str());
+        
+        std::string score = StringUtils::format("Score: %d", static_cast<int>(mScoreValue));
+        mScore->setString(score.c_str());
+    }
+    else
+    {
+        gameOver();
+    }
 }
 
 void HUDLayer::addScore()
 {
     mScoreValue += (SCORE + ShipLayer::Instance()->getBonusUpgrade());
+}
+
+void HUDLayer::gameOver()
+{
+    auto visibleSize = Director::getInstance()->getVisibleSize();
+    Vec2 origin = Director::getInstance()->getVisibleOrigin();
+    
+    auto gameover = createLabel(32, Color4B::BLACK);
+    std::string countdown = StringUtils::format("Game Over. Your score: %d", static_cast<int>(mScoreValue));
+    gameover->setString(countdown.c_str());
+    gameover->setPosition(Vec2(origin.x + visibleSize.width*0.5f, origin.y + visibleSize.height*0.5f));
+    
+    this->unscheduleUpdate();
+    
+    mDistance->setVisible(false);
+    mDirection->setVisible(false);
+    mTime->setVisible(false);
+    mCountDown->setVisible(false);
+    mScore->setVisible(false);
+    mReloadButton->setVisible(false);
+    mSunstoneButton->setVisible(false);
 }
