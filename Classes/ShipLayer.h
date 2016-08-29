@@ -16,7 +16,7 @@ public:
     Sprite* getShip() { return mShip; }
     void addSpeedUpgrade() { mSpeedUpgrade += 10; }
     int getSpeedUpgrade() { return mSpeedUpgrade; }
-    void addBonusUpgrade() { mBonusUpgrade += 10; }
+    void addBonusUpgrade() { mBonusUpgrade += 1; }
     int getBonusUpgrade() { return mBonusUpgrade; }
     
     virtual bool init();

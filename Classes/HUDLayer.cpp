@@ -1,6 +1,7 @@
 #include "HUDLayer.h"
 
 #include "MapLayer.h"
+#include "ShipLayer.h"
 #include "SunLayer.h"
 #include "SunstoneLayer.h"
 
@@ -15,6 +16,8 @@ bool HUDLayer::init()
     
     initMenu();
     initText();
+    mCounter = 120;
+    mScoreValue = 0;
     
     this->scheduleUpdate();
     
@@ -62,6 +65,16 @@ void HUDLayer::initText()
     mTime->setPosition(Vec2(origin.x + visibleSize.width*0.5f,
                             mDistance->getPosition().y - mDistance->getContentSize().height));
     
+    mCountDown = createLabel(12, Color4B::BLACK);
+    mCountDown->setString("Time left: 000s");
+    mCountDown->setPosition(Vec2(origin.x + mCountDown->getContentSize().width*0.5f,
+                            origin.y + visibleSize.height - mCountDown->getContentSize().height));
+    
+    mScore = createLabel(12, Color4B::BLACK);
+    mScore->setString("Score: 000");
+    mScore->setPosition(Vec2(origin.x + visibleSize.width - (mCountDown->getContentSize().width*0.5f),
+                                 origin.y + visibleSize.height - mCountDown->getContentSize().height));
+    
     updateText();
 }
 
@@ -100,4 +113,16 @@ void HUDLayer::update(float dt)
     std::string distance = StringUtils::format("Distance from center: %dm",
                                           MapLayer::Instance()->getDistanceFromCenter());
     mDistance->setString(distance.c_str());
+    
+    mCounter -= dt;
+    std::string countdown = StringUtils::format("Time left: %ds", static_cast<int>(mCounter));
+    mCountDown->setString(countdown.c_str());
+    
+    std::string score = StringUtils::format("Score: %d", static_cast<int>(mScoreValue));
+    mScore->setString(score.c_str());
+}
+
+void HUDLayer::addScore()
+{
+    mScoreValue += (SCORE + ShipLayer::Instance()->getBonusUpgrade());
 }

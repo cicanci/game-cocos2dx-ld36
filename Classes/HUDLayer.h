@@ -16,6 +16,7 @@ public:
     void reloadCallback(Ref* pSender);
     void update(float dt);
     void updateText();
+    void addScore();
 
     virtual bool init();
     CREATE_FUNC(HUDLayer);
@@ -26,9 +27,15 @@ private:
     Label* createLabel(int size, Color4B border);
     
     static HUDLayer* mInstance;
+    float mCounter;
+    int mScoreValue;
     Label* mDistance;
     Label* mDirection;
     Label* mTime;
+    Label* mCountDown;
+    Label* mScore;
+    
+    const int SCORE = 10;
 };
 
 #endif // __HUD_LAYER_H__

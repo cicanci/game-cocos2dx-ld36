@@ -77,7 +77,6 @@ bool MapLayer::onTouchBegan(Touch* touch, Event* event)
 {
     log("MapLayer::touchBegan");
     onTouchMoved(touch, event);
-    MessageLayer::Instance()->showMessage();
     return true;
 }
 
@@ -148,6 +147,7 @@ void MapLayer::checkCollision()
     if (island.intersectsRect(ship))
     {
         log("BIRL!!!!!!!");
+        HUDLayer::Instance()->addScore();
         MessageLayer::Instance()->showMessage();
         reloadLevel();
         mIsMoving = false;
